@@ -19,7 +19,7 @@ let imgHeight;
 formSearh.addEventListener("submit", async (event) => {
     event.preventDefault();
     page = 1
-    searchItem = inputSearch.value;
+    searchItem = inputSearch.value.trim();
 
     if (searchItem == "") {
         iziToast.error({
@@ -60,7 +60,7 @@ async function createGallery(searchItem) {
         gallery.innerHTML = "";
     }
 
-    const loading = document.createElement("p");
+    const loading = document.createElement("span");
     loading.classList.add("loading");
     loading.textContent = "Loading images, please wait..."
     formSearh.append(loading);

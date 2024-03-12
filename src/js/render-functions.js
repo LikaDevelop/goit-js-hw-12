@@ -18,51 +18,25 @@ export function renderingImgs(gallery, hits) {
         galleryImage.alt = i.tags;
         galleryLink.append(galleryImage);
         galleryItem.append(galleryLink);
-        // add discription for img
-        const divForDescription = document.createElement("div");
-        divForDescription.classList.add("description");
-        // likes
-        const divForLikes = document.createElement("div");
-        divForLikes.classList.add("likes")
-        const likesTitle = document.createElement("h4");
-        likesTitle.textContent = "Likes";
-        const likes = document.createElement("p");
-        likes.textContent = i.likes;
-        divForLikes.append(likesTitle);
-        divForLikes.append(likes);
-        divForDescription.append(divForLikes);
-        // views
-        const divForViews = document.createElement("div");
-        divForViews.classList.add("views")
-        const viewsTitle = document.createElement("h4");
-        viewsTitle.textContent = "Views";
-        const view = document.createElement("p");
-        view.textContent = i.views;
-        divForViews.append(viewsTitle);
-        divForViews.append(view);
-        divForDescription.append(divForViews);
-        //comments
-        const divForComments = document.createElement("div");
-        divForComments.classList.add("comments")
-        const commentsTitle = document.createElement("h4");
-        commentsTitle.textContent = "Comments";
-        const comment = document.createElement("p");
-        comment.textContent = i.comments;
-        divForComments.append(commentsTitle);
-        divForComments.append(comment);
-        divForDescription.append(divForComments);
-        // downloads
-        const divForDownloads = document.createElement("div");
-        divForDownloads.classList.add("dowloads")
-        const downloadsTitle = document.createElement("h4");
-        downloadsTitle.textContent = "Downloads";
-        const download = document.createElement("p");
-        download.textContent = i.downloads;
-        divForDownloads.append(downloadsTitle);
-        divForDownloads.append(download);
-        divForDescription.append(divForDownloads);
-
-        galleryItem.append(divForDescription);
+        const description = `<div class="description">
+                                <div class="likes">
+                                    <h4>Likes</h4>
+                                    <p>${i.likes}</p>
+                                </div>
+                                <div class="views">
+                                    <h4>Views</h4>
+                                    <p>${i.views}</p>
+                                </div>
+                                <div class="comments">
+                                    <h4>Comments</h4>
+                                    <p>${i.comments}</p>
+                                </div>
+                                <div class="dowloads">
+                                    <h4>Downloads</h4>
+                                    <p>${i.downloads}</p>
+                                </div>
+                            </div >`;
+        galleryItem.innerHTML += description;
         list.push(galleryItem);
     });
 
