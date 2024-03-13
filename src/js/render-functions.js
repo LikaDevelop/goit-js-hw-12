@@ -43,6 +43,7 @@ export function renderingImgs(gallery, hits) {
     gallery.append(...list);
 
     let lightbox = new SimpleLightbox('ul.gallery a', { captionsData: 'alt', captionDelay: 250 });
+    lightbox.refresh();
     return gallery.children[0].getBoundingClientRect();
 }
 
