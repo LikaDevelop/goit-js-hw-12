@@ -6,9 +6,14 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 
-const formSearh = document.querySelector(".search-form");
+const formSearch = document.querySelector(".search-form");
 const inputSearch = document.querySelector(".search-input");
 const btnMore = document.querySelector(".btn-more");
+const loading = document.createElement("span");
+loading.textContent = "Loading images, please wait..."
+formSearch.append(loading);
+
+loading.hidden = true;
 btnMore.hidden = true;
 let searchItem;
 let hitsState;
@@ -16,7 +21,7 @@ let totalHits;
 let page = 1;
 let imgHeight;
 
-formSearh.addEventListener("submit", async (event) => {
+formSearch.addEventListener("submit", async (event) => {
     event.preventDefault();
     page = 1
     searchItem = inputSearch.value.trim();
@@ -34,7 +39,6 @@ formSearh.addEventListener("submit", async (event) => {
 });
 
 btnMore.addEventListener("click", async (event) => {
-    console.log(totalHits)
     const totalPages = Math.ceil(totalHits / 15);
     if (page > totalPages) {
         btnMore.hidden = true;
@@ -60,15 +64,13 @@ async function createGallery(searchItem) {
         gallery.innerHTML = "";
     }
 
-    const loading = document.createElement("span");
-    loading.classList.add("loading");
-    loading.textContent = "Loading images, please wait..."
-    formSearh.append(loading);
+    loading.hidden = false;
+
 
     const data = await request.fetchHits(searchItem, page);
     hitsState = data.hits;
     totalHits = data.totalHits;
-    loading.remove();
+    loading.hidden = true;
     if (hitsState.length === 0) {
         iziToast.error({
             title: 'Error',
