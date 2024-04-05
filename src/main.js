@@ -65,11 +65,17 @@ async function createGallery(searchItem) {
     }
 
     loading.hidden = false;
-
+    btnMore.hidden = true;
 
     const data = await request.fetchHits(searchItem, page);
     hitsState = data.hits;
     totalHits = data.totalHits;
+    if (hitsState.length < 15) {
+        btnMore.hidden = true;
+    }
+    else {
+        btnMore.hidden = false;
+    }
     loading.hidden = true;
     if (hitsState.length === 0) {
         iziToast.error({
@@ -77,13 +83,13 @@ async function createGallery(searchItem) {
             message: "Sorry, there are no images matching your search query. Please try again!"
         });
     }
+
     else {
         imgHeight = render.renderingImgs(gallery, hitsState);
-
-        page += 1;
         if (page > 1) {
             btnMore.hidden = false;
         }
+        page += 1;
     }
 }
 
